@@ -1,0 +1,54 @@
+{
+  "lastUpdated": "2026-08-15T09:30:00Z",
+  "departments": [
+    {
+      "id": "dept-001",
+      "name": "General OPD",
+      "doctorId": "doc-001",
+      "currentToken": 18,
+      "totalTokensToday": 34,
+      "estimatedTimePerPatient": 12,
+      "queue": [
+        { "token": 19, "patientId": "pat-001", "patientName": "Ravi Kumar", "checkedIn": true, "urgency": "normal", "estimatedStart": "10:15 AM", "estimatedEnd": "10:27 AM", "status": "waiting" },
+        { "token": 20, "patientId": "pat-004", "patientName": "Ananya Singh", "checkedIn": true, "urgency": "normal", "estimatedStart": "10:27 AM", "estimatedEnd": "10:39 AM", "status": "waiting" },
+        { "token": 21, "patientId": "pat-003", "patientName": "Subramaniam Iyer", "checkedIn": false, "urgency": "urgent", "estimatedStart": "10:39 AM", "estimatedEnd": "10:51 AM", "status": "waiting" },
+        { "token": 22, "patientId": null, "patientName": "Gopal Verma", "checkedIn": false, "urgency": "normal", "estimatedStart": "10:51 AM", "estimatedEnd": "11:03 AM", "status": "waiting" }
+      ]
+    },
+    {
+      "id": "dept-002",
+      "name": "Panchakarma",
+      "doctorId": "doc-002",
+      "currentToken": 6,
+      "totalTokensToday": 12,
+      "estimatedTimePerPatient": 20,
+      "queue": [
+        { "token": 7, "patientId": "pat-005", "patientName": "Mohammed Salim", "checkedIn": true, "urgency": "normal", "estimatedStart": "10:20 AM", "estimatedEnd": "10:40 AM", "status": "waiting" },
+        { "token": 8, "patientId": null, "patientName": "Kavitha Reddy", "checkedIn": true, "urgency": "normal", "estimatedStart": "10:40 AM", "estimatedEnd": "11:00 AM", "status": "waiting" }
+      ]
+    },
+    {
+      "id": "dept-003",
+      "name": "Stri Roga & Prasuti",
+      "doctorId": "doc-003",
+      "currentToken": 10,
+      "totalTokensToday": 22,
+      "estimatedTimePerPatient": 15,
+      "queue": [
+        { "token": 11, "patientId": "pat-002", "patientName": "Priya Menon", "checkedIn": true, "urgency": "normal", "estimatedStart": "10:35 AM", "estimatedEnd": "10:50 AM", "status": "waiting" },
+        { "token": 12, "patientId": null, "patientName": "Divya Krishnan", "checkedIn": false, "urgency": "normal", "estimatedStart": "10:50 AM", "estimatedEnd": "11:05 AM", "status": "waiting" }
+      ]
+    }
+  ],
+  "redFlagAlerts": [
+    {
+      "id": "alert-001",
+      "patientName": "Urgent Walk-in",
+      "token": "TRIAGE-01",
+      "flaggedSymptom": "Chest pain and severe shortness of breath",
+      "timestamp": "2026-08-15T09:28:00Z",
+      "status": "pending",
+      "contactNumber": "+91-9999999999"
+    }
+  ]
+}

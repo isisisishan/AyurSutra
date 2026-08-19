@@ -1,0 +1,12 @@
+[
+  { "formulationId": "form-001", "name": "Triphala Churna", "status": "in_stock", "quantity": 45, "unit": "100g packs", "batchNumber": "TPC-2026-08", "expiryDate": "2028-02-28" },
+  { "formulationId": "form-002", "name": "Avipattikar Churna", "status": "low_stock", "quantity": 5, "unit": "100g packs", "batchNumber": "APC-2026-07", "expiryDate": "2027-12-31" },
+  { "formulationId": "form-003", "name": "Ashokarishta", "status": "in_stock", "quantity": 28, "unit": "450ml bottles", "batchNumber": "ASH-2026-06", "expiryDate": "2027-06-30" },
+  { "formulationId": "form-004", "name": "Chandraprabha Vati", "status": "in_stock", "quantity": 60, "unit": "60-tablet strips", "batchNumber": "CPV-2026-08", "expiryDate": "2028-01-31" },
+  { "formulationId": "form-005", "name": "Sitopaladi Churna", "status": "out_of_stock", "quantity": 0, "unit": "100g packs", "batchNumber": null, "expiryDate": null },
+  { "formulationId": "form-006", "name": "Sudarshana Churna", "status": "in_stock", "quantity": 20, "unit": "100g packs", "batchNumber": "SDC-2026-05", "expiryDate": "2027-10-31" },
+  { "formulationId": "form-007", "name": "Yogaraj Guggulu", "status": "low_stock", "quantity": 8, "unit": "60-tablet strips", "batchNumber": "YRG-2026-07", "expiryDate": "2027-08-31" },
+  { "formulationId": "form-008", "name": "Pathyadi Kwatha", "status": "in_stock", "quantity": 15, "unit": "200g packs", "batchNumber": "PTK-2026-08", "expiryDate": "2027-09-30" },
+  { "formulationId": "form-009", "name": "Kutajarishta", "status": "in_stock", "quantity": 32, "unit": "450ml bottles", "batchNumber": "KTA-2026-06", "expiryDate": "2027-06-30" },
+  { "formulationId": "form-010", "name": "Guduchi Kwatha", "status": "in_stock", "quantity": 22, "unit": "200g packs", "batchNumber": "GDK-2026-08", "expiryDate": "2027-11-30" }
+]

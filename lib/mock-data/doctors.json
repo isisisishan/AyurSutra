@@ -1,0 +1,62 @@
+[
+  {
+    "id": "doc-001",
+    "name": "Dr. Meena Sharma",
+    "qualifications": "BAMS, MD (Ayurveda)",
+    "department": "General OPD",
+    "specialization": "Kayachikitsa (Internal Medicine)",
+    "currentStatus": "available",
+    "statusUpdatedAt": "2026-08-15T07:30:00Z",
+    "avgConsultationDurationMinutes": 12,
+    "todayConsultationsCompleted": 18,
+    "todayQueue": 8,
+    "opd": "OPD-1",
+    "phone": "+91-9876543210",
+    "email": "dr.meena@ayursutra.in"
+  },
+  {
+    "id": "doc-002",
+    "name": "Dr. Raghav Pillai",
+    "qualifications": "BAMS, PhD (Panchakarma)",
+    "department": "Panchakarma",
+    "specialization": "Panchakarma & Rejuvenation",
+    "currentStatus": "consulting",
+    "statusUpdatedAt": "2026-08-15T09:15:00Z",
+    "avgConsultationDurationMinutes": 20,
+    "todayConsultationsCompleted": 6,
+    "todayQueue": 5,
+    "opd": "OPD-2",
+    "phone": "+91-9876543211",
+    "email": "dr.raghav@ayursutra.in"
+  },
+  {
+    "id": "doc-003",
+    "name": "Dr. Lakshmi Nair",
+    "qualifications": "BAMS, MD (Stri Roga)",
+    "department": "Stri Roga & Prasuti",
+    "specialization": "Women's Health & Obstetrics",
+    "currentStatus": "delayed",
+    "statusUpdatedAt": "2026-08-15T09:00:00Z",
+    "avgConsultationDurationMinutes": 15,
+    "todayConsultationsCompleted": 10,
+    "todayQueue": 12,
+    "opd": "OPD-3",
+    "phone": "+91-9876543212",
+    "email": "dr.lakshmi@ayursutra.in"
+  },
+  {
+    "id": "doc-004",
+    "name": "Dr. Arvind Gupta",
+    "qualifications": "BAMS, MS (Shalya Tantra)",
+    "department": "Shalya Tantra",
+    "specialization": "Ayurvedic Surgery & Ksharasutra",
+    "currentStatus": "on_rounds",
+    "statusUpdatedAt": "2026-08-15T08:45:00Z",
+    "avgConsultationDurationMinutes": 18,
+    "todayConsultationsCompleted": 4,
+    "todayQueue": 3,
+    "opd": "OPD-4",
+    "phone": "+91-9876543213",
+    "email": "dr.arvind@ayursutra.in"
+  }
+]
