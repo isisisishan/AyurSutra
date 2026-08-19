@@ -5,6 +5,7 @@ import { useAppStore } from "@/lib/store/app-store";
 import { scorePrakriti } from "@/lib/services/prakriti-scorer";
 import questions from "@/lib/mock-data/prakriti-questions.json";
 import { Leaf, ChevronRight, SkipForward, ChevronLeft, Info } from "lucide-react";
+import { PatientNav } from "@/components/shared/PatientNav";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Badge } from "@/components/ui/Badge";
@@ -75,11 +76,7 @@ export default function PrakritiPage() {
     ];
     return (
       <div className="min-h-screen flex flex-col">
-        <div className="bg-white border-b border-neutral-100 px-4 py-4">
-          <div className="max-w-lg mx-auto">
-            <p className="text-xs text-neutral-500">AyurSutra · Prakriti Result</p>
-          </div>
-        </div>
+        <PatientNav onBack={() => setShowResult(false)} />
         <div className="flex-1 max-w-lg mx-auto w-full px-4 py-8 animate-fade-in">
           <div className="flex items-center gap-2 mb-5">
             <Leaf className="w-5 h-5 text-neutral-400" />
@@ -163,12 +160,9 @@ export default function PrakritiPage() {
   if (!started) {
     return (
       <div className="min-h-screen flex flex-col">
-        <div className="bg-white border-b border-neutral-100 px-4 py-4">
-          <div className="max-w-lg mx-auto">
-            <p className="text-xs text-neutral-500">AyurSutra · Optional Prakriti Assessment</p>
-          </div>
-        </div>
-        <div className="flex-1 max-w-lg mx-auto w-full px-4 py-10 animate-fade-in">
+        <PatientNav onBack={() => router.push("/patient/intake")} />
+
+        <div className="flex-1 max-w-lg mx-auto w-full px-4 py-8 animate-fade-in">
           <div className="flex items-center gap-2 mb-8">
             {[1, 2, 3, 4, 5, 6].map((s) => (
               <div key={s} className={cn("h-1 rounded-full flex-1", s <= 5 ? "bg-black" : "bg-neutral-200")} />
@@ -223,6 +217,7 @@ export default function PrakritiPage() {
   // Question view
   return (
     <div className="min-h-screen flex flex-col">
+      <PatientNav onBack={() => currentQ > 0 ? setCurrentQ(currentQ - 1) : setStarted(false)} />
       <div className="bg-white border-b border-neutral-100 px-4 py-3">
         <div className="max-w-lg mx-auto">
           <div className="flex items-center justify-between mb-2">

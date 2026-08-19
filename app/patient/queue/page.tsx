@@ -6,12 +6,15 @@ import queueData from "@/lib/mock-data/queue.json";
 import { DoctorStatusBadge } from "@/components/shared/DoctorStatusBadge";
 import { estimateConsultationWindow } from "@/lib/services/queue-estimator";
 import { Clock, Hash, Users, Bell, RefreshCw, AlertTriangle, CheckCircle, Building2 } from "lucide-react";
+import { PatientNav } from "@/components/shared/PatientNav";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { getDoctorStatusConfig } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 export default function QueueTrackerPage() {
+  const router = useRouter();
   const { patientSession } = useAppStore();
   const { appointmentToken, selectedDepartment, selectedDoctorId } = patientSession;
 
@@ -65,27 +68,29 @@ export default function QueueTrackerPage() {
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      {/* Header */}
-      <div className="bg-white border-b border-neutral-100 px-4 py-4 sticky top-0 z-10">
-        <div className="max-w-lg mx-auto flex items-center justify-between">
-          <div>
-            <p className="text-xs text-neutral-500">AyurSutra · Live Queue</p>
-            <p className="text-xs text-neutral-400 mt-0.5">
-              Updated {lastRefreshed.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
-            </p>
-          </div>
-          <button
-            onClick={refresh}
-            className={cn("flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-800 transition-colors", isRefreshing && "opacity-50")}
-            id="queue-refresh-btn"
-          >
-            <RefreshCw className={cn("w-3.5 h-3.5", isRefreshing && "animate-spin")} />
-            Refresh
-          </button>
+      <PatientNav 
+        backLabel="← Back to appointments" 
+        onBack={() => router.push("/patient/appointment")} 
+      />
+
+      <div className="max-w-lg mx-auto px-4 pt-4 pb-2 flex items-center justify-between">
+        <div>
+          <p className="text-xs text-neutral-500">Live Queue</p>
+          <p className="text-xs text-neutral-400 mt-0.5">
+            Updated {lastRefreshed.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+          </p>
         </div>
+        <button
+          onClick={refresh}
+          className={cn("flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-800 transition-colors", isRefreshing && "opacity-50")}
+          id="queue-refresh-btn"
+        >
+          <RefreshCw className={cn("w-3.5 h-3.5", isRefreshing && "animate-spin")} />
+          Refresh
+        </button>
       </div>
 
-      <div className="max-w-lg mx-auto px-4 py-6 space-y-4">
+      <div className="max-w-lg mx-auto px-4 py-4 space-y-4">
         {/* Notifications */}
         {notifications.length > 0 && (
           <div className="space-y-2 animate-fade-in">

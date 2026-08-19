@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/lib/store/app-store";
 import { MessageSquare, Mic, MicOff, ChevronRight, Plus, X, CheckCircle, AlertCircle } from "lucide-react";
+import { PatientNav } from "@/components/shared/PatientNav";
 import { Button } from "@/components/ui/Button";
 import { Textarea } from "@/components/ui/Input";
 import { Badge } from "@/components/ui/Badge";
@@ -108,14 +109,7 @@ export default function IntakePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-white border-b border-neutral-100 px-4 py-4">
-        <div className="max-w-lg mx-auto flex items-center gap-3">
-          <MessageSquare className="w-5 h-5 text-neutral-400" />
-          <div>
-            <p className="text-xs text-neutral-500">AyurSutra · Symptom Intake</p>
-          </div>
-        </div>
-      </div>
+      <PatientNav onBack={() => step > 0 ? setStep(step - 1) : router.push("/patient/register")} />
 
       <div className="flex-1 max-w-lg mx-auto w-full px-4 py-8">
         {/* Outer step bar */}

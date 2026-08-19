@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppStore } from "@/lib/store/app-store";
 import { User, Phone, CreditCard, ChevronRight, CheckCircle } from "lucide-react";
+import { PatientNav } from "@/components/shared/PatientNav";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Input";
@@ -75,11 +76,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-white border-b border-neutral-100 px-4 py-4">
-        <div className="max-w-lg mx-auto">
-          <p className="text-xs text-neutral-500">AyurSutra · Patient Registration</p>
-        </div>
-      </div>
+      <PatientNav onBack={() => router.push("/patient/screening")} />
 
       <div className="flex-1 max-w-lg mx-auto w-full px-4 py-8 animate-fade-in">
         {/* Step bar */}

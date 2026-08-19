@@ -237,20 +237,8 @@ export default function ExploreAyurvedaPage() {
           </div>
         )}
 
-        {/* ── Inline Compare Panel ─────────────────────────────────── */}
-        {showCompare && compareIds.length >= 2 && (
-          <div className="mb-8">
-            <ComparePanel
-              ids={compareIds}
-              mode="public"
-              onClose={() => setShowCompare(false)}
-            />
-          </div>
-        )}
-
         {/* ── Main layout ──────────────────────────────────────────── */}
-        {!showCompare && (
-          <div className={cn("flex gap-6", selectedDetail ? "items-start" : "")}>
+        <div className={cn("flex gap-6", selectedDetail ? "items-start" : "")}>
             {/* Results */}
             <div className={cn("flex-1 min-w-0", selectedDetail && "max-w-[60%]")}>
               {/* Loading */}
@@ -343,8 +331,16 @@ export default function ExploreAyurvedaPage() {
               </div>
             )}
           </div>
-        )}
       </div>
+
+      {/* Compare Modal */}
+      {showCompare && compareIds.length >= 2 && (
+        <ComparePanel
+          ids={compareIds}
+          mode="public"
+          onClose={() => setShowCompare(false)}
+        />
+      )}
 
       {/* Max-3 toast */}
       {maxToast && (

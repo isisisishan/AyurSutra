@@ -647,15 +647,7 @@ export default function DoctorDashboardPage() {
                       </>
                     )}
 
-                    {/* Inline compare */}
-                    {bkkShowCompare && bkkCompareIds.length >= 2 && (
-                      <ComparePanel
-                        ids={bkkCompareIds}
-                        mode="doctor"
-                        patientContext={patientClinicalContext}
-                        onClose={() => setBkkShowCompare(false)}
-                      />
-                    )}
+
 
                   </div>
 
@@ -711,6 +703,16 @@ export default function DoctorDashboardPage() {
                   onClearAll={() => setBkkCompareIds([])}
                   onCompare={() => setBkkShowCompare(true)}
                 />
+
+                {/* Compare Modal */}
+                {bkkShowCompare && bkkCompareIds.length >= 2 && (
+                  <ComparePanel
+                    ids={bkkCompareIds}
+                    mode="doctor"
+                    patientContext={patientClinicalContext}
+                    onClose={() => setBkkShowCompare(false)}
+                  />
+                )}
               </>
             )}
           </div>

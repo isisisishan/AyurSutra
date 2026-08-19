@@ -387,12 +387,12 @@ export function compareFormulations(ids: string[]): ComparisonResult {
   const fields: ComparisonField[] = [
     { label: "Type", key: "type", values: formulations.map((f) => f.type) },
     { label: "Category", key: "category", values: formulations.map((f) => f.category) },
-    { label: "Main Ingredients", key: "main_ingredients", values: formulations.map((f) => f.main_ingredients.join(", ")) },
-    { label: "Full Ingredients", key: "ingredients", values: formulations.map((f) => f.ingredients) },
-    { label: "Indications", key: "indications", values: formulations.map((f) => f.indications) },
-    { label: "Anupana (Vehicle)", key: "anupana", values: formulations.map((f) => f.anupana) },
-    { label: "Classical Reference", key: "reference", values: formulations.map((f) => f.reference) },
-    { label: "Source Dosage", key: "dosage", values: formulations.map((f) => f.dosage ? `${f.dosage} (reference only — clinician verification required)` : "Not available in source record.") },
+    { label: "Main ingredients", key: "main_ingredients", values: formulations.map((f) => f.main_ingredients.join(", ")) },
+    { label: "Full ingredients", key: "ingredients", values: formulations.map((f) => f.ingredients) },
+    { label: "Traditional uses", key: "indications", values: formulations.map((f) => f.indications) },
+    { label: "Anupana", key: "anupana", values: formulations.map((f) => f.anupana) },
+    { label: "Traditional Text", key: "reference", values: formulations.map((f) => f.reference) },
+    { label: "Dosage information, if available", key: "dosage", values: formulations.map((f) => f.dosage ? `${f.dosage} (reference only — clinician verification required)` : "Not listed") },
   ];
   return { formulations, fields };
 }

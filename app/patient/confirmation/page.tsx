@@ -6,8 +6,11 @@ import { CheckCircle, Clock, Hash, Building2, User, ChevronRight, Bell } from "l
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { DoctorStatusBadge } from "@/components/shared/DoctorStatusBadge";
+import { PatientNav } from "@/components/shared/PatientNav";
+import { useRouter } from "next/navigation";
 
 export default function ConfirmationPage() {
+  const router = useRouter();
   const { patientSession } = useAppStore();
   const {
     appointmentToken,
@@ -28,8 +31,13 @@ export default function ConfirmationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md animate-fade-in">
+    <div className="min-h-screen bg-neutral-50 flex flex-col">
+      <PatientNav 
+        backLabel="← Back to appointments" 
+        onBack={() => router.push("/patient/appointment")}
+      />
+      <div className="flex-1 flex flex-col items-center justify-center p-4">
+        <div className="w-full max-w-md animate-fade-in">
         {/* Success */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -125,6 +133,7 @@ export default function ConfirmationPage() {
             </Button>
           </Link>
         </div>
+      </div>
       </div>
     </div>
   );

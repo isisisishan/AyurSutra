@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useAppStore } from "@/lib/store/app-store";
 import { SUPPORTED_LANGUAGES } from "@/lib/utils";
 import { Leaf, Globe, ChevronRight, ShieldCheck } from "lucide-react";
+import { PatientNav } from "@/components/shared/PatientNav";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -61,13 +62,7 @@ export default function LanguageConsentPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <div className="bg-white border-b border-neutral-100 px-4 py-4 flex items-center gap-2">
-        <div className="w-7 h-7 bg-black rounded-[0.4rem] flex items-center justify-center">
-          <Leaf className="w-4 h-4 text-white" />
-        </div>
-        <span className="font-serif font-semibold text-neutral-900">AyurSutra</span>
-      </div>
+      <PatientNav backLabel="← Back to home" onBack={() => router.push("/")} />
 
       <div className="flex-1 max-w-lg mx-auto w-full px-4 py-10 animate-fade-in">
         {/* Step indicator */}

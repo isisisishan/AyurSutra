@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useAppStore } from "@/lib/store/app-store";
 import doctorsData from "@/lib/mock-data/doctors.json";
 import { Calendar, ChevronRight, Clock, User, CheckCircle } from "lucide-react";
+import { PatientNav } from "@/components/shared/PatientNav";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -66,11 +67,7 @@ export default function AppointmentPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-white border-b border-neutral-100 px-4 py-4">
-        <div className="max-w-2xl mx-auto">
-          <p className="text-xs text-neutral-500">AyurSutra · Appointment Booking</p>
-        </div>
-      </div>
+      <PatientNav onBack={() => router.push("/patient/prakriti")} />
 
       <div className="flex-1 max-w-2xl mx-auto w-full px-4 py-8 animate-fade-in">
         <div className="flex items-center gap-2 mb-8">

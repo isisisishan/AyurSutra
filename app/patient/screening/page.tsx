@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useAppStore } from "@/lib/store/app-store";
 import { screenForRedFlags } from "@/lib/services/red-flag-screener";
 import { AlertTriangle, Mic, MicOff, ChevronRight, Activity, ShieldCheck, Phone } from "lucide-react";
+import { PatientNav } from "@/components/shared/PatientNav";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -87,16 +88,11 @@ export default function ScreeningPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-white border-b border-neutral-100 px-4 py-4">
-        <div className="max-w-lg mx-auto flex items-center gap-3">
-          <div className="w-7 h-7 bg-black rounded-[0.4rem] flex items-center justify-center">
-            <Activity className="w-4 h-4 text-white" />
-          </div>
-          <div>
-            <p className="text-xs text-neutral-500">AyurSutra · Safety Screening</p>
-          </div>
-        </div>
-      </div>
+      <PatientNav 
+        backLabel={result?.hasRedFlag ? "← Back to home" : "← Back"} 
+        onBack={() => router.push(result?.hasRedFlag ? "/" : "/patient/language")}
+        hideHome={result?.hasRedFlag}
+      />
 
       <div className="flex-1 max-w-lg mx-auto w-full px-4 py-8 animate-fade-in">
         {/* Step bar */}
