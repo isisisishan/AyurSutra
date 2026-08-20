@@ -7,6 +7,7 @@ export type AuditEventType =
   | "formulation_viewed"
   | "safety_rule_triggered"
   | "formulation_selected"
+  | "formulation_removed"
   | "formulation_rejected"
   | "doctor_override"
   | "comparison_opened";
