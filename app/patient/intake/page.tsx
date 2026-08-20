@@ -146,10 +146,10 @@ export default function IntakePage() {
         {step === 0 && (
           <div className="animate-fade-in">
             <h1 className="font-serif text-3xl font-semibold text-neutral-900 mb-2">
-              What brings you in today?
+              Please describe your current health concern
             </h1>
             <p className="text-neutral-500 text-sm mb-6">
-              Describe your main symptoms in your own words. Use voice or type.
+              Please describe the symptoms or health concerns you would like to discuss. You may type or use voice input.
             </p>
             <div className="relative mb-6">
               <Textarea
@@ -361,7 +361,17 @@ export default function IntakePage() {
 
             <div className="flex gap-3">
               <Button variant="outline" fullWidth onClick={() => setStep(2)}>Back</Button>
-              <Button fullWidth onClick={() => setStep(4)} rightIcon={<ChevronRight className="w-4 h-4" />} id="intake-step3-next">Review &amp; Confirm</Button>
+              <Button fullWidth onClick={() => {
+                if (medicineName.trim()) {
+                  if (!medicines.includes(medicineName.trim())) setMedicines(prev => [...prev, medicineName.trim()]);
+                  setMedicineName("");
+                }
+                if (allergyName.trim()) {
+                  if (!allergies.includes(allergyName.trim())) setAllergies(prev => [...prev, allergyName.trim()]);
+                  setAllergyName("");
+                }
+                setStep(4);
+              }} rightIcon={<ChevronRight className="w-4 h-4" />} id="intake-step3-next">Review &amp; Confirm</Button>
             </div>
           </div>
         )}
