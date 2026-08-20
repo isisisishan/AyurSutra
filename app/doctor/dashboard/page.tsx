@@ -173,7 +173,21 @@ export default function DoctorDashboardPage() {
         actor: currentUser?.id ?? "unknown",
         formulationId: record.id,
         formulationName: record.name,
-        details: `Selected for prescription review`,
+        details: `Selected for prescription`,
+      });
+    }
+  }
+
+  function handleBkkRemoveFromReview(record: BKKRecord) {
+    if (bkkSelectedForReview.includes(record.id)) {
+      setBkkSelectedForReview((prev) => prev.filter((id) => id !== record.id));
+      setPrescriptionLines((lines) => lines.filter((l) => l.formulationId !== record.id));
+      logAuditEvent({
+        eventType: "formulation_removed",
+        actor: currentUser?.id ?? "unknown",
+        formulationId: record.id,
+        formulationName: record.name,
+        details: `Removed from prescription`,
       });
     }
   }
@@ -628,7 +642,7 @@ export default function DoctorDashboardPage() {
 
                           return (
                             <div key={record.id} className={cn(isReviewed && "ring-2 ring-emerald-400 ring-offset-1 rounded-xl")}>
-                              {isReviewed && <p className="text-[10px] font-semibold text-emerald-600 px-2 pb-1">✓ Selected for prescription review</p>}
+                              {isReviewed && <p className="text-[10px] font-semibold text-emerald-600 px-2 pb-1">✓ Selected for prescription</p>}
                               <FormulationCard
                                 record={record}
                                 mode="doctor"
@@ -647,6 +661,7 @@ export default function DoctorDashboardPage() {
                                   setBkkCompareIds((prev) => prev.includes(record.id) ? prev.filter((x) => x !== record.id) : prev.length < 3 ? [...prev, record.id] : prev);
                                 }}
                                 onSelectForReview={() => handleBkkSelectForReview(record)}
+                                onRemoveFromPrescription={() => handleBkkRemoveFromReview(record)}
                                 onReject={() => handleBkkReject(record)}
                               />
                             </div>

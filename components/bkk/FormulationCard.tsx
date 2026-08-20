@@ -19,6 +19,7 @@ interface FormulationCardProps {
   onViewDetail?: () => void;
   onToggleCompare?: () => void;
   onSelectForReview?: () => void;
+  onRemoveFromPrescription?: () => void;
   onReject?: () => void;
   className?: string;
 }
@@ -51,6 +52,7 @@ export function FormulationCard({
   onViewDetail,
   onToggleCompare,
   onSelectForReview,
+  onRemoveFromPrescription,
   onReject,
   className,
 }: FormulationCardProps) {
@@ -161,24 +163,38 @@ export function FormulationCard({
         )}
         {mode === "doctor" && !isExcluded && (
           <>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={onSelectForReview}
-              className="text-emerald-700 hover:bg-emerald-50"
-              id={`select-${record.id}`}
-            >
-              Select for review
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={onReject}
-              className="text-red-600 hover:bg-red-50"
-              id={`reject-${record.id}`}
-            >
-              Reject
-            </Button>
+            {isSelected ? (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={onRemoveFromPrescription}
+                className="text-emerald-700 border-emerald-200 bg-emerald-50 hover:bg-emerald-100"
+                id={`remove-${record.id}`}
+              >
+                Added to prescription
+              </Button>
+            ) : (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={onSelectForReview}
+                className="text-emerald-700 hover:bg-emerald-50"
+                id={`select-${record.id}`}
+              >
+                Prescribe
+              </Button>
+            )}
+            {!isSelected && (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={onReject}
+                className="text-red-600 hover:bg-red-50"
+                id={`reject-${record.id}`}
+              >
+                Reject
+              </Button>
+            )}
           </>
         )}
       </div>
