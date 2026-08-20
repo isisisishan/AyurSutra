@@ -57,6 +57,11 @@ interface PrescriptionLine {
   instructions: string;
 }
 
+const formatDoctorName = (name: string) => {
+  if (!name) return "";
+  return "Dr. " + name.replace(/^(Dr\.|Dr\s+)\s*/i, "").trim();
+};
+
 export default function DoctorDashboardPage() {
   const router = useRouter();
   const { currentUser, isAuthenticated, logout } = useAppStore();
@@ -73,7 +78,6 @@ export default function DoctorDashboardPage() {
   const [safetyAcknowledged, setSafetyAcknowledged] = useState<Record<string, boolean>>({});
   // BKK Clinical Explorer state
   const [bkkQuery, setBkkQuery] = useState("");
-  const [bkkSymptoms, setBkkSymptoms] = useState("");
   const [bkkResults, setBkkResults] = useState<BKKSearchResult[]>([]);
   const [bkkSearched, setBkkSearched] = useState(false);
   const [bkkSelectedDetail, setBkkSelectedDetail] = useState<BKKRecord | null>(null);
@@ -126,10 +130,16 @@ export default function DoctorDashboardPage() {
 
   function runBkkSearch() {
     if (!diagnosisConfirmed || !diagnosisText.trim()) return;
-    const symptoms = bkkSymptoms.split(/[,;]+/).map((s) => s.trim()).filter(Boolean);
+    
+    const p = selectedPatient as any;
+    let autoSymptoms: string[] = [];
+    if (p?.symptoms) autoSymptoms.push(p.symptoms);
+    if (p?.comorbidities?.length) autoSymptoms.push(...p.comorbidities);
+    if (p?.currentMedicines?.length) autoSymptoms.push(...p.currentMedicines);
+
     const context: ClinicalContext = {
       confirmedDiagnosis: bkkQuery.trim() || diagnosisText.trim(),
-      associatedSymptoms: symptoms,
+      associatedSymptoms: autoSymptoms,
     };
     const results = searchBKKClinical(context);
     setBkkResults(results);
@@ -137,7 +147,7 @@ export default function DoctorDashboardPage() {
     logAuditEvent({
       eventType: "search_performed",
       actor: currentUser?.id ?? "unknown",
-      details: `Clinical search: diagnosis="${context.confirmedDiagnosis}", symptoms=[${symptoms.join(", ")}]`,
+      details: `Clinical search: diagnosis="${context.confirmedDiagnosis}", context=[${autoSymptoms.join(", ")}]`,
     });
   }
 
@@ -233,7 +243,7 @@ export default function DoctorDashboardPage() {
               <Stethoscope className="w-4 h-4 text-white" />
             </div>
             <div>
-              <span className="font-serif font-semibold text-neutral-900">{doctor.name}</span>
+              <span className="font-serif font-semibold text-neutral-900">{formatDoctorName(doctor.name)}</span>
               <span className="text-neutral-400 text-sm ml-2">· {doctor.department}</span>
             </div>
           </div>
@@ -477,13 +487,14 @@ export default function DoctorDashboardPage() {
                           alert("Please enter a clinical diagnosis in the text area above before confirming.");
                           return;
                         }
+                        if (!diagnosisConfirmed && !bkkQuery) setBkkQuery(diagnosisText);
                         setDiagnosisConfirmed(!diagnosisConfirmed);
                       }}
                       className="mt-0.5 accent-green-600"
                       id="diagnosis-confirm-checkbox"
                     />
                     <div>
-                      <p className="text-sm font-medium text-neutral-900">I, Dr. {doctor.name}, confirm this diagnosis</p>
+                      <p className="text-sm font-medium text-neutral-900">I, {formatDoctorName(doctor.name)}, confirm this diagnosis</p>
                       <p className="text-xs text-neutral-500 mt-0.5">
                         This constitutes a clinical record. AI outputs are clearly labelled and were used as reference only.
                       </p>
@@ -560,27 +571,24 @@ export default function DoctorDashboardPage() {
                   </div>
 
                   {/* Search inputs */}
-                  <div className="flex flex-col sm:flex-row gap-2 mb-2">
-                    <input
-                      type="text"
-                      value={bkkQuery}
-                      onChange={(e) => setBkkQuery(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && runBkkSearch()}
-                      placeholder={`Search by disease/term (default: "${diagnosisText.slice(0, 30)}...")`}
-                      className="flex-1 text-sm border border-neutral-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-neutral-900"
-                      id="bkk-clinical-query"
-                    />
-                    <input
-                      type="text"
-                      value={bkkSymptoms}
-                      onChange={(e) => setBkkSymptoms(e.target.value)}
-                      placeholder="Associated symptoms (comma separated)"
-                      className="flex-1 text-sm border border-neutral-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-neutral-900"
-                      id="bkk-clinical-symptoms"
-                    />
-                    <Button onClick={runBkkSearch} size="sm" id="bkk-clinical-search-btn">
-                      <Search className="w-4 h-4 mr-1" /> Search
-                    </Button>
+                  <div>
+                    <label htmlFor="bkk-clinical-query" className="block text-xs font-medium text-neutral-700 mb-1.5">
+                      Search formulations
+                    </label>
+                    <div className="flex flex-col sm:flex-row gap-2 mb-2">
+                      <input
+                        type="text"
+                        value={bkkQuery}
+                        onChange={(e) => setBkkQuery(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && runBkkSearch()}
+                        placeholder="Search by diagnosis, symptom, or ingredient"
+                        className="flex-1 text-sm border border-neutral-200 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-neutral-900"
+                        id="bkk-clinical-query"
+                      />
+                      <Button onClick={runBkkSearch} size="sm" id="bkk-clinical-search-btn">
+                        <Search className="w-4 h-4 mr-1" /> Search
+                      </Button>
+                    </div>
                   </div>
                   <p className="text-[10px] text-neutral-400">System-generated research results. Clinician independently determines final prescription.</p>
                 </div>
